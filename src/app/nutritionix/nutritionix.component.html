@@ -1,0 +1,45 @@
+<div id="search-component">
+  <h4>Food Search: Click on item to add to Journal</h4>
+  <input #searchQuery (keyup)="getItems(searchQuery.value)" id="search-box" />
+  
+      <div *ngFor="let item of items">
+        <div class="search-result" (click)="addFoodToJournal(item.fields)">
+          {{item.fields.item_name}}
+        </div>
+      </div>  
+</div>
+
+
+<h1>Journal Entries</h1>
+<ul>
+  <button type="button" class="btn btn-info" (click)="getJournalFromService()">Show Journal</button>
+  <button type="button" class="btn btn-info" (click)="show = !show">Additional Information</button>
+  <br><br>
+
+  <div *ngFor="let jent of jentries">
+       <!--<div *ngIf= "jent.userId == currentUser.id">         -->
+      {{jent.item_name}} {{jent.userId}}  <button type="button" class="btn btn-danger" (click)="deleteFood(jent)">Delete</button>
+      <br>
+      <div *ngIf="show">
+         
+        <div class="additional-info-journal">
+          <ul>
+            <li> <strong>Brand:</strong> {{jent.brand_name}} </li>
+            <li> Calories: {{jent.nf_calories}} kcal</li>
+            <li> Total Fat: {{jent.nf_total_fat}}g</li>
+            <li> Saturated Fat: {{jent.nf_saturated_fat}}g</li>
+            <li> Sodium: {{jent.nf_sodium}}mg</li>
+            <li> Carbohydrates: {{jent.nf_total_carbohydrate}}g</li>
+            <li> Fiber: {{jent.nf_dietary_fiber}}g</li>
+            <li> Sugar: {{jent.nf_sugars}}g</li>
+            <li> Protein: {{jent.nf_protein}}g</li>
+            <!--<li> Date: {{jent.createdAt | date:'dd/MM/yyyy'}}</li>-->
+          </ul>
+        </div>
+        <br>
+      </div>
+    <!--</div> -->
+  <!--</div>-->
+  </div>
+</ul>
+

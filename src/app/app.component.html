@@ -1,3 +1,34 @@
-<h1>
-  {{title}}
-</h1>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['/']">Y3P</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a [routerLink]="['/']">Home</a></li>
+        <!--<li><a [routerLink]="['/Calendar']">Calendar</a></li>-->
+        <li><a [routerLink]="['/BMI']">BMI</a></li>   
+        <li><a [routerLink]="['/journal']">Journal</a></li>   
+        <li><a [routerLink]="['/login']">Login/.Logout</a></li>
+      </ul>         
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<!-- main app container -->
+<!--<div class="jumbotron">-->
+    <div class="container">
+        <div class="col-sm-10 col-md-10 col-lg-10 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+            <alert></alert>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+<!--</div>-->
+
+<!-- credits -->
+<div class="text-center">
+    <h1> Y3P Weight Loss</h1>   
+</div>

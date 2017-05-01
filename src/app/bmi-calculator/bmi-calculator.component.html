@@ -1,0 +1,90 @@
+<div class="col-md-2 col-xs-2"> </div>
+<div class="col-md-8 col-xs-8 nameholder">
+<p> If you are trying to come up with an ideal wait goal for yourself. Give our Bmi Calculator a go</p>
+  <div class="row">
+    <div class="col-md-4 col-xs-4"> </div>
+
+    <div class="col-md-4 col-xs-4">
+      
+      <h2>BMI Calculator</h2>
+      <h3>Enter Your Weight</h3>
+    </div>
+    <div class="col-md-4 col-xs-4"> </div>
+  </div>
+  <form class="form-horizontal" name="convert">
+    <div class="row">
+      <div class="col-md-4 col-xs-4">
+        <div class="col-sm-4"> </div>
+        <label class="control-label col-sm-4" for="stone">Stone</label>
+
+        <input [(ngModel)]="stone" name="stone" (keyup)="LBToKG()" class="form-control" placeholder="Enter a number">
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <div class="col-sm-4"> </div>
+        <label class="control-label col-sm-4" for="pounds">Pounds</label>
+        <input [(ngModel)]="pounds" name="pounds" (keyup)="LBToKG()" class="form-control" placeholder="Enter a number">
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <div class="col-sm-4"> </div>
+        <label class="control-label col-sm-4" for="kilo">Kilograms</label>
+        <input [(ngModel)]="kilo" name="kilo" (keyup)="KGToLB()" class="form-control" placeholder="Enter a number">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 col-xs-4"> </div>
+
+      <div class="col-md-4 col-xs-4">
+        <h3>Enter Your Height</h3>
+      </div>
+      <div class="col-md-4 col-xs-4"> </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 col-xs-4">
+        <div class="col-sm-4"> </div>
+        <label class="control-label col-sm-4" for="feet">Feet</label>
+        <input [(ngModel)]="feet" name="feet" (keyup)="FeetAndInchToMeter()" class="form-control" placeholder="Enter a number">
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <div class="col-sm-4"> </div>
+        <label class="control-label col-sm-4" for="inches">Inches</label>
+        <input [(ngModel)]="inches" name="inches" (keyup)="FeetAndInchToMeter()" class="form-control" placeholder="Enter a number">
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <div class="col-sm-4"> </div>
+        <label class="control-label col-sm-4" for="meters">Meters</label>
+        <input [(ngModel)]="meters" name="meters" (keyup)="MeterToInchAndFeet()" class="form-control" placeholder="Enter a number">
+      </div>
+
+    </div>
+    <div class="row somepadding">
+      <div class="col-sm-4"> </div>
+      <div class="col-sm-4">
+        <button class="btn btn-primary center-block" (click)="bmiCalc()">Calculate BMI</button>
+      </div>
+      <div class="col-sm-4"> </div>
+    </div>
+  </form>
+
+  <div class="row"> 
+    <div class="col-sm-12 text-center">
+    <p>Enter your weight in stone/pounds or kilograms and your height in feet/inches or meters</p>
+    </div>    
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <strong>Result:</strong>
+    </div>
+  </div>
+<div class="row">
+
+  <div class="text-center bmi-holder">
+    <h2>{{bmiString}}</h2> <h2 [style.color]="isNormal() ? 'green':'red'">{{range}}</h2>      
+  </div>
+ 
+  <!--todo: AddToCalendarButton-->
+</div>
+
+  </div>
+  <!--NAME HOLDER END -->

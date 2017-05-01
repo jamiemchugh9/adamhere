@@ -1,0 +1,28 @@
+.search-result{
+  border-bottom: 1px solid gray;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  width:696px;
+  height: 30px;
+  padding: 5px;
+  margin-left:2px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.search-result:hover {
+  color: #eee;
+  background-color: #607D8B;
+}
+
+#search-box{
+  width: 700px;
+  height: 30px;
+}
+
+.additional-info-journal{
+  /*float:left;*/
+  border-style: solid;
+  border-color: lightgray;
+  background-color: lightsteelblue;
+}
