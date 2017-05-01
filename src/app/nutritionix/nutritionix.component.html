@@ -1,3 +1,5 @@
+
+
 <div id="search-component">
   <h4>Food Search: Click on item to add to Journal</h4>
   <input #searchQuery (keyup)="getItems(searchQuery.value)" id="search-box" />
@@ -18,7 +20,7 @@
 
   <div *ngFor="let jent of jentries">
        <!--<div *ngIf= "jent.userId == currentUser.id">         -->
-      {{jent.item_name}} {{jent.userId}}  <button type="button" class="btn btn-danger" (click)="deleteFood(jent)">Delete</button>
+      {{jent.item_name}} {{totalCal}} {{totalCal2}} {{totalFat}}  {{totalCarb}}  {{totalSugar}}  {{totalProtein}}  {{totalSodium}}  <button type="button" class="btn btn-danger" (click)="deleteFood(jent)">Delete</button>
       <br>
       <div *ngIf="show">
          
@@ -38,8 +40,25 @@
         </div>
         <br>
       </div>
+      
     <!--</div> -->
   <!--</div>-->
   </div>
 </ul>
+<div class = "display-total">
+  <h1>Todays Intake:</h1>
+  <ul>
+  <li>Total Calories: {{totalCal}}</li>
+  <li>Total Fat: {{totalFat}}</li>
+  <li>Total Saturated Fat: {{totalSaturated}}</li>
+  <li>Total Sodium: {{totalSodium}}</li>
+  <li>Total Carbohydrates: {{totalCarb}}</li>
+  <li>Total Fiber: {{totalFiber}}</li>
+  <li>Total Sugars: {{totalSugar}}</li>
+  <li>Total Protein: {{totalProtein}}</li>
+  </ul>
 
+  <p> Total Amount of Calories needed to maintain weight: {{calcBmr()}}</p>
+  <p> Total Amount of calories consumed today:{{totalCal}}</p>
+  <p> {{calToBmr()}}</p>
+</div>

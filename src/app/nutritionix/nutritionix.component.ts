@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { Food, Journal } from './index';
 import { User } from '../-models/index';
-
+import { BmiService } from '../bmi-calculator/index';
 import { UserService } from '../-services/index';
 import { NutritionixService } from './nutritionix.service';
 
@@ -24,19 +24,37 @@ export class NutritionixComponent implements OnInit {
   show:boolean = false;
   jentries = [];
   journalId:number;
+  totalCal:number = 0;
+  totalCal2:number = 0;
+  totalFat:number = 0;
+  totalSaturated: number = 0;
+  totalCarb:number = 0;
+  totalSugar:number = 0;
+  totalProtein:number = 0;
+  totalSodium:number = 0;
+  totalFiber:number = 0;
+  bmr:number ;
+  weight:number;
+  height:number;
+  goalWeight:number;
+  age:number;
+  out:string;
+
 
   //search string
   searchQuery;
 
   
-  constructor(private nutritionixService: NutritionixService) { 
+  constructor(private nutritionixService: NutritionixService, private bmiService: BmiService) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit(): any {
       this.getTodaysJournalId(); 
       this.getJournalFromService();
-  }
+      this.getUserInfo(this.currentUser);
+      this.calcBmr();
+;  }
 
   ngAfterViewInit(){
     // this.getTodaysJournalId();  
@@ -70,6 +88,7 @@ export class NutritionixComponent implements OnInit {
       }
     );
   }
+  
     
   getTodaysJournalId(){
     this.nutritionixService.searchTodaysJournalEntry().subscribe(
@@ -97,7 +116,27 @@ export class NutritionixComponent implements OnInit {
     this.nutritionixService.getJournal(this.journalId).subscribe(
       data => { 
         console.log('\n\nGetJournalFromService Results: ', data);
+        this.totalCal = 0;
+        this.totalCarb = 0;
+        this.totalFat = 0;
+        this.totalSugar = 0;
+        this.totalSodium  = 0;
+        this.totalProtein = 0;
+        this.totalSaturated = 0;
+        this.totalFiber = 0;
         this.jentries = data.fooditems ;
+        for(let i in this.jentries){
+          this.totalCal += this.jentries[i].nf_calories;
+          this.totalCal2 = this.jentries[i].nf_calories;
+          this.totalFat += this.jentries[i].nf_total_fat;
+          this.totalCarb += this.jentries[i].nf_total_carbohydrate;
+          this.totalSugar += this.jentries[i].nf_sugars;
+          this.totalProtein += this.jentries[i].nf_protein;
+          this.totalSodium += this.jentries[i].nf_sodium;
+          this.totalSaturated += this.jentries[i].nf_saturated_fat;
+          this.totalFiber += this.jentries[i].nf_dietary_fiber;
+
+        }
         console.log('search results', this.jentries);
       },
       err => console.error(err),
@@ -105,6 +144,7 @@ export class NutritionixComponent implements OnInit {
     );
   }
 
+  
   deleteFood(food) {
     if (confirm("Delete entry: " + food.item_name + "?")) {
       this.nutritionixService.deleteFromJournal(food.item_id, this.journalId).subscribe(
@@ -114,7 +154,38 @@ export class NutritionixComponent implements OnInit {
       )
     }
   }
+      getUserInfo(elephant){
+    this.bmiService.getOneInfo(elephant.id).subscribe(
+      data => {
+          console.log('search results', data)
+          
+          this.weight = data.weight;
+          this.height = data.height;
+          this.goalWeight = data.goalWeight;
+          this.age = data.age;
+    },    
+      (err) => alert("Error getting user information:" + err)
+    )
+  }
+  calcBmr() {
+        this.bmr = 66 + (13.17 * this.weight) + (5 * (this.height * 100) - (6.8 * this.age));
+        return this.bmr;
+    }
 
+    calToBmr(){
+      if(this.bmr > this.totalCal)
+      {
+        this.out = "Good Work! Keep it up"
+      }
+      else{
+        this.out = "You'll Have to do Better Than That!";
+      }
+      return this.out;
+    }
+
+
+
+    
 
 
 

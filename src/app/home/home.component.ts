@@ -19,7 +19,6 @@ import { BmiCalculatorComponent } from 'app/bmi-calculator/bmi-calculator.compon
 export class HomeComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
-    bmr: number;
     show: boolean = false;
     username:string;
     firstName:string;
@@ -43,7 +42,6 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.loadAllUsers();
-        this.calcBmr();
         this.getUserInfo(this.currentUser);
         this.tempa = this.currentUser.age;
         this.tempfn = this.currentUser.firstName;
@@ -62,9 +60,6 @@ export class HomeComponent implements OnInit {
         this.userService.getAll().subscribe(users => { this.users = users; });
     }
 
-    calcBmr() {
-        this.bmr = 66 + (13.17 * this.currentUser.weight) + (5 * (this.currentUser.height * 100) - (6.8 * this.currentUser.age));
-    }
 
     delUser2() {
         {
